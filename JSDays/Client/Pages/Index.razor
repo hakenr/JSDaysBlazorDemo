@@ -1,0 +1,20 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+@if (surveyResult is not null)
+{
+    <p>Result: @surveyResult</p>
+}
+else
+{
+    <SurveyPrompt Title="How is Blazor working for you?" @bind-Value="surveyResult">Test</SurveyPrompt>
+}
+
+@code {
+    private int? surveyResult;
+}

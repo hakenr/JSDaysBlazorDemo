@@ -1,0 +1,28 @@
+﻿<div class="alert alert-secondary mt-4">
+    <span class="oi oi-pencil me-2" aria-hidden="true"></span>
+    <strong>@Title</strong>
+
+    <input type="range" @bind-value="Value" @bind-value:event="oninput" /> @Value °C 
+    <HxButton Color="ThemeColor.Danger" Tooltip="Please vote" OnClick="HandleClick">Submit</HxButton>
+
+    @ChildContent
+</div>
+
+@code {
+
+    // Demonstrates how a parent component can supply parameters
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter] public int? Value { get; set; }
+    [Parameter] public EventCallback<int?> ValueChanged { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    private async Task HandleClick()
+    {
+        if (Value > 50)
+        {
+            await ValueChanged.InvokeAsync(Value);
+        }
+    }
+}
